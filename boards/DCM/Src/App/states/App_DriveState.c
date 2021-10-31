@@ -15,6 +15,10 @@ static void DriveStateRunOnEntry(struct StateMachine *const state_machine)
 
     App_CanTx_SetPeriodicSignal_STATE(
         can_tx_interface, CANMSGS_DCM_STATE_MACHINE_STATE_DRIVE_CHOICE);
+
+    // Enable inverter 1.
+    App_CanTx_SetPeriodicSignal_INVERTER_ENABLE(can_tx_interface,
+    CANMSGS_DCM_INV1_COMMAND_MESSAGE_INVERTER_ENABLE_ENABLE_INVERTER_1_CHOICE);
 }
 
 static void DriveStateRunOnTick1Hz(struct StateMachine *const state_machine)

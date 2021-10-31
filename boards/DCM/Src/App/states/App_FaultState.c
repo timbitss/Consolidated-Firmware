@@ -10,6 +10,10 @@ static void FaultStateRunOnEntry(struct StateMachine *const state_machine)
     struct DcmCanTxInterface *can_tx_interface = App_DcmWorld_GetCanTx(world);
     App_CanTx_SetPeriodicSignal_STATE(
         can_tx_interface, CANMSGS_DCM_STATE_MACHINE_STATE_FAULT_CHOICE);
+
+    // Disable inverter 1.
+    App_CanTx_SetPeriodicSignal_INVERTER_ENABLE(can_tx_interface,
+    CANMSGS_DCM_INV1_COMMAND_MESSAGE_INVERTER_ENABLE_DISABLE_INVERTER_1_CHOICE);
 }
 
 static void FaultStateRunOnTick1Hz(struct StateMachine *const state_machine)
