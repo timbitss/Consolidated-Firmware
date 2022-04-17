@@ -230,7 +230,8 @@ int main(void)
         Io_RgbLedSequence_TurnOnGreenLed);
 
     charger = App_Charger_Create(
-        Io_Charger_Enable, Io_Charger_Disable, Io_Charger_IsConnected);
+        Io_Charger_Enable, Io_Charger_Disable, Io_Charger_IsConnected,
+        Io_Charger_HasFaulted);
 
     bms_ok = App_OkStatus_Create(
         Io_OkStatuses_EnableBmsOk, Io_OkStatuses_DisableBmsOk,
@@ -810,10 +811,10 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : ACCEL_BRAKE_OK_Pin GPIO1_Pin GPIO2_Pin
+    /*Configure GPIO pins : ACCEL_BRAKE_OK_Pin BRUSA_FLT_Pin GPIO2_Pin
      * CHARGE_STATE_Pin */
     GPIO_InitStruct.Pin =
-        ACCEL_BRAKE_OK_Pin | GPIO1_Pin | GPIO2_Pin | CHARGE_STATE_Pin;
+        ACCEL_BRAKE_OK_Pin | BRUSA_FLT_Pin | GPIO2_Pin | CHARGE_STATE_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);

@@ -23,6 +23,7 @@ static void Io_ProcessBmsNonCriticalErrorMsg(
         data->stack_watermark_above_threshold_taskcantx);
     SET_ERROR(
         error_table, BMS_NON_CRITICAL_WATCHDOG_TIMEOUT, data->watchdog_timeout);
+    SET_ERROR(error_table, BMS_NON_CRITICAL_CHARGING_DONE, data->charging_done);
 }
 
 static void Io_ProcessDcmNonCriticalErrorMsg(
@@ -193,6 +194,9 @@ static void Io_ProcessBmsAirShutdownErrorMsg(
     SET_ERROR(
         error_table, BMS_AIR_SHUTDOWN_MAX_CELL_VOLTAGE_OUT_OF_RANGE,
         data->max_cell_voltage_out_of_range);
+    SET_ERROR(
+        error_table, BMS_AIR_SHUTDOWN_CHARGER_FAULT_DETECTED,
+        data->charger_fault_detected);
 }
 
 static void Io_ProcessDcmAirShutdownErrorMsg(

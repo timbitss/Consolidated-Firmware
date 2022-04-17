@@ -41,6 +41,7 @@ FAKE_VOID_FUNC(turn_on_blue_led);
 FAKE_VOID_FUNC(enable_charger);
 FAKE_VOID_FUNC(disable_charger);
 FAKE_VALUE_FUNC(bool, is_charger_connected);
+FAKE_VALUE_FUNC(bool, has_charger_faulted);
 FAKE_VALUE_FUNC(ExitCode, enable_bms_ok);
 FAKE_VALUE_FUNC(ExitCode, disable_bms_ok);
 FAKE_VALUE_FUNC(bool, is_bms_ok_enabled);
@@ -102,7 +103,8 @@ class BmsStateMachineTest : public BaseStateMachineTest
             turn_on_red_led, turn_on_green_led, turn_on_blue_led);
 
         charger = App_Charger_Create(
-            enable_charger, disable_charger, is_charger_connected);
+            enable_charger, disable_charger, is_charger_connected,
+            has_charger_faulted);
 
         bms_ok = App_OkStatus_Create(
             enable_bms_ok, disable_bms_ok, is_bms_ok_enabled);
