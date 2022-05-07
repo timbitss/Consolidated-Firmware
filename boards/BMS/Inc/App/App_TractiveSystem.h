@@ -23,3 +23,17 @@ void App_TractiveSystem_Destroy(struct TractiveSystem *ts);
  * @return The voltage in (V)
  */
 float App_TractiveSystem_GetVoltage(struct TractiveSystem *ts);
+
+/**
+ * Get the voltage from the Tractive System
+ * @param tractive_system The Tractive System to get the voltage from
+ * @return The voltage of the given Tractive System
+ */
+float App_TractiveSystem_GetSystemVoltage(const struct TractiveSystem *ts);
+
+/**
+ * Get the capacitance on the Tractive System
+ * @param tractive_system The Tractive System to get the voltage from
+ * @return The capacitance of the given Tractive System
+ */
+float App_TractiveSystem_GetSystemCapacitance(void);

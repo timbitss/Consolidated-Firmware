@@ -53,6 +53,13 @@ void App_Accumulator_Destroy(struct Accumulator *accumulator);
 bool App_Accumulator_HasCommunicationError(const struct Accumulator *accumulator);
 
 /**
+ * Get the pack voltage in V
+ * @param accumulator The accumulator to get the pack voltage
+ * @return The accumulator pack voltage in V
+ */
+float App_Accumulator_GetPackVoltage(struct Accumulator *accumulator);
+
+/**
  * Get the maximum cell voltage in [V]
  * @param accumulator The accumulator to monitor cell voltages and temperatures
  * @return The maximum cell voltage in [V]
