@@ -23,7 +23,6 @@ static void Io_ProcessBmsNonCriticalErrorMsg(
         data->stack_watermark_above_threshold_taskcantx);
     SET_ERROR(
         error_table, BMS_NON_CRITICAL_WATCHDOG_TIMEOUT, data->watchdog_timeout);
-    SET_ERROR(error_table, BMS_NON_CRITICAL_CHARGING_DONE, data->charging_done);
 }
 
 static void Io_ProcessDcmNonCriticalErrorMsg(
