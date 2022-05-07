@@ -8,18 +8,17 @@
 
 static void ChargeStateRunOnEntry(struct StateMachine *const state_machine)
 {
-    struct BmsWorld *world = App_SharedStateMachine_GetWorld(state_machine);
+    struct BmsWorld *         world            = App_SharedStateMachine_GetWorld(state_machine);
     struct BmsCanTxInterface *can_tx_interface = App_BmsWorld_GetCanTx(world);
-    struct Charger *          charger          = App_BmsWorld_GetCharger(world);
-    struct Clock *            clock            = App_BmsWorld_GetClock(world);
+    App_CanTx_SetPeriodicSignal_STATE(can_tx_interface, CANMSGS_BMS_STATE_MACHINE_STATE_CHARGE_CHOICE);
+    struct Charger *charger = App_BmsWorld_GetCharger(world);
+    struct Clock *  clock   = App_BmsWorld_GetClock(world);
 
     App_Charger_Enable(charger); // Start charging process
 
-    App_SharedClock_SetPreviousTimeInMilliseconds(
-        clock, App_SharedClock_GetCurrentTimeInMilliseconds(clock));
+    App_SharedClock_SetPreviousTimeInMilliseconds(clock, App_SharedClock_GetCurrentTimeInMilliseconds(clock));
 
-    App_CanTx_SetPeriodicSignal_STATE(
-        can_tx_interface, CANMSGS_BMS_STATE_MACHINE_STATE_CHARGE_CHOICE);
+    App_CanTx_SetPeriodicSignal_STATE(can_tx_interface, CANMSGS_BMS_STATE_MACHINE_STATE_CHARGE_CHOICE);
 }
 
 static void ChargeStateRunOnTick1Hz(struct StateMachine *const state_machine)
@@ -31,15 +30,14 @@ static void ChargeStateRunOnTick100Hz(struct StateMachine *const state_machine)
 {
     App_AllStatesRunOnTick100Hz(state_machine);
 
-    struct BmsWorld *world = App_SharedStateMachine_GetWorld(state_machine);
+    struct BmsWorld *         world   = App_SharedStateMachine_GetWorld(state_machine);
     struct BmsCanTxInterface *can_tx  = App_BmsWorld_GetCanTx(world);
     struct Charger *          charger = App_BmsWorld_GetCharger(world);
     struct Clock *            clock   = App_BmsWorld_GetClock(world);
 
     if (!App_Charger_IsConnected(charger))
     {
-        App_CanTx_SetPeriodicSignal_CHARGER_DISCONNECTED_IN_CHARGE_STATE(
-            can_tx, true);
+        App_CanTx_SetPeriodicSignal_CHARGER_DISCONNECTED_IN_CHARGE_STATE(can_tx, true);
         App_SharedStateMachine_SetNextState(state_machine, App_GetFaultState());
     }
 
@@ -51,8 +49,7 @@ static void ChargeStateRunOnTick100Hz(struct StateMachine *const state_machine)
 
     // Track the time since accumulator charging started
     const uint32_t elapsed_time_s =
-        App_SharedClock_GetCurrentTimeInSeconds(clock) -
-        App_SharedClock_GetPreviousTimeInSeconds(clock);
+        App_SharedClock_GetCurrentTimeInSeconds(clock) - App_SharedClock_GetPreviousTimeInSeconds(clock);
 
     // Go to the fault state when charging has completed to indicate that
     // the charger should be disconnected and the BMS-Core should be
