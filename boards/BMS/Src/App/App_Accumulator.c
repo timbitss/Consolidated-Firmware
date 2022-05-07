@@ -78,6 +78,11 @@ bool App_Accumulator_HasCommunicationError(const struct Accumulator *const accum
     return accumulator->num_comm_tries >= MAX_NUM_COMM_TRIES;
 }
 
+float App_Accumulator_GetMaxCellVoltage(const struct Accumulator *const accumulator)
+{
+    return accumulator->get_max_cell_voltage(NULL, NULL);
+}
+
 void App_Accumulator_InitRunOnEntry(const struct Accumulator *const accumulator)
 {
     // Configure the cell monitoring chips. Disable discharge at startup

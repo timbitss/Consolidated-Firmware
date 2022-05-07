@@ -690,7 +690,7 @@ BA_ "GenMsgCycleTime" BO_ 508 1000;
 BA_ "GenMsgCycleTime" BO_ 509 1000;
 BA_ "GenMsgCycleTime" BO_ 510 1000;
 
-BA_ "GenMsgCycleTime" BO_ 700 1000;
+BA_ "GenMsgCycleTime" BO_ 700 0;
 
 SIG_VALTYPE_ 106 Duty_Cycle : 1;
 SIG_VALTYPE_ 106 Frequency : 1;
@@ -731,7 +731,6 @@ VAL_ 82 Inverter_Enable_INVR 0 "OFF" 1 "ON";
 VAL_ 82 Direction_Command_INVR 0 "CW" 1 "CCW";
 VAL_ 82 Inverter_Discharge_INVR 0 "Discharge Disable" 1 "Discharge Enable (if EEPROM parameter is set)";
 
-VAL_ 104 CHARGING_DONE 0 "FALSE" 1 "TRUE";
 VAL_ 105 Condition 0 "IMD_SHORT_CIRCUIT" 1 "IMD_NORMAL" 2 "IMD_UNDERVOLTAGE_DETECTED" 3 "IMD_SST" 4 "IMD_DEVICE_ERROR" 5 "IMD_EARTH_FAULT" 6 "IMD_INVALID";
 VAL_ 105 OK_HS 0 "NO FAULT" 1 "FAULT";
 VAL_ 107 State 0 "INIT" 1 "AIR_OPEN" 2 "PRE_CHARGE" 3 "CHARGE" 4 "DRIVE" 5 "FAULT";

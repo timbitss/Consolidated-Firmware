@@ -211,7 +211,8 @@ int main(void)
     imd = App_Imd_Create(Io_Imd_GetFrequency, IMD_FREQUENCY_TOLERANCE, Io_Imd_GetDutyCycle, Io_Imd_GetTimeSincePowerOn);
 
     can_tx = App_CanTx_Create(
-        Io_CanTx_EnqueueNonPeriodicMsg_BMS_STARTUP, Io_CanTx_EnqueueNonPeriodicMsg_BMS_WATCHDOG_TIMEOUT);
+        Io_CanTx_EnqueueNonPeriodicMsg_BMS_STARTUP, Io_CanTx_EnqueueNonPeriodicMsg_BMS_WATCHDOG_TIMEOUT,
+        Io_CanTx_EnqueueNonPeriodicMsg_BMS_CHARGING_STATUS);
 
     can_rx = App_CanRx_Create();
 
@@ -779,8 +780,8 @@ static void MX_GPIO_Init(void)
     GPIO_InitStruct.Pull = GPIO_NOPULL;
     HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-    /*Configure GPIO pins : ACCEL_BRAKE_OK_Pin BRUSA_FLT_Pin GPIO2_Pin
-     * CHARGE_STATE_Pin */
+    /*Configure GPIO pins : ACCEL_BRAKE_OK_Pin BRUSA_FLT_Pin GPIO2_Pin CHARGE_STATE_Pin */
+    GPIO_InitStruct.Pin  = ACCEL_BRAKE_OK_Pin | BRUSA_FLT_Pin | GPIO2_Pin | CHARGE_STATE_Pin;
     GPIO_InitStruct.Pin =
         ACCEL_BRAKE_OK_Pin | BRUSA_FLT_Pin | GPIO2_Pin | CHARGE_STATE_Pin;
     GPIO_InitStruct.Mode = GPIO_MODE_INPUT;
