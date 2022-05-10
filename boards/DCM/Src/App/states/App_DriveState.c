@@ -24,7 +24,30 @@ static void DriveStateRunOnEntry(struct StateMachine *const state_machine)
 
 static void DriveStateRunOnTick1Hz(struct StateMachine *const state_machine)
 {
+    struct DcmWorld *         world  = App_SharedStateMachine_GetWorld(state_machine);
+    struct DcmCanTxInterface *can_tx = App_DcmWorld_GetCanTx(world);
+    struct DcmCanRxInterface *can_rx = App_DcmWorld_GetCanRx(world);
+
     App_SharedStatesRunOnTick1Hz(state_machine);
+
+    // Allow PCAN to disable/enable inverters in the drive state
+    if (App_CanRx_PCAN_CONFIG_INVERTERS_GetSignal_DISABLE_INVL(can_rx))
+    {
+        App_CanTx_SetPeriodicSignal_INVERTER_ENABLE_INVL(can_tx, false);
+    }
+    else
+    {
+        App_CanTx_SetPeriodicSignal_INVERTER_ENABLE_INVL(can_tx, true);
+    }
+
+    if (App_CanRx_PCAN_CONFIG_INVERTERS_GetSignal_DISABLE_INVR(can_rx))
+    {
+        App_CanTx_SetPeriodicSignal_INVERTER_ENABLE_INVR(can_tx, false);
+    }
+    else
+    {
+        App_CanTx_SetPeriodicSignal_INVERTER_ENABLE_INVR(can_tx, true);
+    }
 }
 
 static void DriveStateRunOnTick100Hz(struct StateMachine *const state_machine)

@@ -594,6 +594,10 @@ SG_ DUMMY_AIR_SHUTDOWN : 0|1@1+ (1,0) [0|1] "" DCM
 BO_ 510 DIM_MOTOR_SHUTDOWN_ERRORS: 8 DIM
 SG_ DUMMY_MOTOR_SHUTDOWN : 0|1@1+ (1,0) [0|1] "" DCM
 
+BO_ 800 PCAN_CONFIG_INVERTERS: 1 DEBUG
+SG_ DISABLE_INVL : 0|1@1+ (1,0) [0|1] "" DCM
+SG_ DISABLE_INVR : 1|1@1+ (1,0) [0|1] "" DCM
+
 BA_DEF_  "BusType" STRING ;
 BA_DEF_ BO_  "GenMsgCycleTime" INT 0 65535;
 BA_DEF_ SG_  "GenSigStartValue" INT 0 2147483647;
@@ -705,6 +709,8 @@ BA_ "GenMsgCycleTime" BO_ 508 1000;
 BA_ "GenMsgCycleTime" BO_ 509 1000;
 BA_ "GenMsgCycleTime" BO_ 510 1000;
 
+BA_ "GenMsgCycleTime" BO_ 800 1000;
+
 SIG_VALTYPE_ 106 Duty_Cycle : 1;
 SIG_VALTYPE_ 106 Frequency : 1;
 SIG_VALTYPE_ 110 MAX_CELL_VOLTAGE : 1;
@@ -797,3 +803,6 @@ VAL_ 506 Drive_Mode 0 "DRIVE_MODE_1" 1 "DRIVE_MODE_2" 2 "DRIVE_MODE_3" 3 "DRIVE_
 VAL_ 507 Start_Switch 0 "OFF" 1 "ON";
 VAL_ 507 Traction_Control_Switch 0 "OFF" 1 "ON";
 VAL_ 507 Torque_Vectoring_Switch  0 "OFF" 1 "ON";
+
+VAL_ 800 DISABLE_INVL 0 "FALSE" 1 "TRUE";
+VAL_ 800 DISABLE_INVR 0 "FALSE" 1 "TRUE";
